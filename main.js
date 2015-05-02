@@ -26,63 +26,220 @@ app.on('ready', function () {
     mainWindow = null;
   });
 
-  var template = [
-    {
-      label: '&File',
-      submenu: [
-        {
-          label: '&Close',
-          accelerator: 'CmdOrCtrl+W',
-          click: function() { mainWindow.close(); }
-        }
-      ]
-    },
-    {
-      label: 'Page',
-      submenu: [
-        {
-          label: 'Home',
-          click: function () {
-            mainWindow.webContents.send('transitionTo', 'home');
+  if (process.platform === 'darwin') {
+    var osxTemplate = [
+      {
+        label: 'Electron',
+        submenu: [
+          {
+            label: 'About Electron',
+            selector: 'orderFrontStandardAboutPanel:'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Services',
+            submenu: []
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Hide Electron',
+            accelerator: 'Command+H',
+            selector: 'hide:'
+          },
+          {
+            label: 'Hide Others',
+            accelerator: 'Command+Shift+H',
+            selector: 'hideOtherApplications:'
+          },
+          {
+            label: 'Show All',
+            selector: 'unhideAllApplications:'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            click: function() { app.quit(); }
+          },
+        ]
+      },
+      {
+        label: 'Edit',
+        submenu: [
+          {
+            label: 'Undo',
+            accelerator: 'Command+Z',
+            selector: 'undo:'
+          },
+          {
+            label: 'Redo',
+            accelerator: 'Shift+Command+Z',
+            selector: 'redo:'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Cut',
+            accelerator: 'Command+X',
+            selector: 'cut:'
+          },
+          {
+            label: 'Copy',
+            accelerator: 'Command+C',
+            selector: 'copy:'
+          },
+          {
+            label: 'Paste',
+            accelerator: 'Command+V',
+            selector: 'paste:'
+          },
+          {
+            label: 'Select All',
+            accelerator: 'Command+A',
+            selector: 'selectAll:'
+          },
+        ]
+      },
+      {
+        label: 'Page',
+        submenu: [
+          {
+            label: 'Home',
+            click: function () {
+              mainWindow.webContents.send('transitionTo', 'home');
+            }
+          },
+          {
+            label: 'About',
+            click: function () {
+              mainWindow.webContents.send('transitionTo', 'about');
+            }
+          },
+          {
+            label: 'Contact',
+            click: function () {
+              mainWindow.webContents.send('transitionTo', 'contact');
+            }
           }
-        },
-        {
-          label: 'About',
-          click: function () {
-            mainWindow.webContents.send('transitionTo', 'about');
+        ]
+      },
+      {
+        label: 'View',
+        submenu: [
+          {
+            label: 'Reload',
+            accelerator: 'Command+R',
+            click: function() { mainWindow.restart(); }
+          },
+          {
+            label: 'Toggle Fullscreen',
+            click: function() {
+              mainWindow.setFullScreen(!mainWindow.isFullScreen());
+            }
+          },
+          {
+            label: 'Toggle DevTools',
+            accelerator: 'Alt+Command+I',
+            click: function() { mainWindow.toggleDevTools(); }
+          },
+        ]
+      },
+      {
+        label: 'Window',
+        submenu: [
+          {
+            label: 'Minimize',
+            accelerator: 'Command+M',
+            selector: 'performMiniaturize:'
+          },
+          {
+            label: 'Close',
+            accelerator: 'Command+W',
+            selector: 'performClose:'
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: 'Bring All to Front',
+            selector: 'arrangeInFront:'
+          },
+        ]
+      },
+    ];
+
+    menu = Menu.buildFromTemplate(osxTemplate);
+    Menu.setApplicationMenu(menu);
+  } else {
+    var template = [
+      {
+        label: '&File',
+        submenu: [
+          {
+            label: '&Open',
+            accelerator: 'Ctrl+O',
+          },
+          {
+            label: '&Close',
+            accelerator: 'Ctrl+W',
+            click: function() { mainWindow.close(); }
+          },
+        ]
+      },
+      {
+        label: 'Page',
+        submenu: [
+          {
+            label: 'Home',
+            click: function () {
+              mainWindow.webContents.send('transitionTo', 'home');
+            }
+          },
+          {
+            label: 'About',
+            click: function () {
+              mainWindow.webContents.send('transitionTo', 'about');
+            }
+          },
+          {
+            label: 'Contact',
+            click: function () {
+              mainWindow.webContents.send('transitionTo', 'contact');
+            }
           }
-        },
-        {
-          label: 'Contact',
-          click: function () {
-            mainWindow.webContents.send('transitionTo', 'contact');
-          }
-        }
-      ]
-    },
-    {
-      label: '&View',
-      submenu: [
-        {
-          label: '&Reload',
-          accelerator: 'CmdOrCtrl+R',
-          click: function() { mainWindow.restart(); }
-        },
-        {
-          label: 'Toggle &Fullscreen',
-          accelerator: 'CmdOrCtrl+F',
-          click: function() {
-            mainWindow.setFullScreen(!mainWindow.isFullScreen());
-          }
-        },
-        {
-          label: '&Toggle DevTools',
-          accelerator: 'Alt+CmdOrCtrl+I',
-          click: function() { mainWindow.toggleDevTools(); }
-        },
-      ]
-    }
-  ];
-  menu = Menu.buildFromTemplate(template);
-  mainWindow.setMenu(menu);
+        ]
+      },
+      {
+        label: '&View',
+        submenu: [
+          {
+            label: '&Reload',
+            accelerator: 'Ctrl+R',
+            click: function() { mainWindow.restart(); }
+          },
+          {
+            label: 'Toggle &Fullscreen',
+            click: function() {
+              mainWindow.setFullScreen(!mainWindow.isFullScreen());
+            }
+          },
+          {
+            label: '&Toggle DevTools',
+            accelerator: 'Alt+Ctrl+I',
+            click: function() { mainWindow.toggleDevTools(); }
+          },
+        ]
+      },
+    ];
+
+    menu = Menu.buildFromTemplate(template);
+    mainWindow.setMenu(menu);
+  }
 });

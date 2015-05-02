@@ -4,7 +4,8 @@
   "description": "Project template for Electron with React support",
   "main": "main.js",
   "scripts": {
-    "win": "node_modules\\electron-prebuilt\\dist\\electron ."
+    "win": "node_modules\\electron-prebuilt\\dist\\electron .",
+    "osx": "node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron ."
   },
   "author": "Denis Vuyka <denis.vuyka@gmail.com>",
   "license": "MIT",
