@@ -26,6 +26,20 @@ app.on('ready', function () {
     mainWindow = null;
   });
 
+  // Dock Menu (OSX)
+  if (process.platform === 'darwin') {
+    var dockMenu = Menu.buildFromTemplate([
+      { label: 'New Window', click: function() { console.log('New Window'); } },
+      { label: 'New Window with Settings', submenu: [
+        { label: 'Basic' },
+        { label: 'Pro'},
+      ]},
+      { label: 'New Command...'},
+    ]);
+    app.dock.setMenu(dockMenu);
+  }
+
+  // Application Menu
   if (process.platform === 'darwin') {
     var osxTemplate = [
       {
