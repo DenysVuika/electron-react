@@ -24,6 +24,8 @@ Additional features for development:
 
 Default template also provides basic application menu integration for Windows and OS X, together with navigation to demo Routes (React Router) by means of application menu items and cross-process messaging support provided by Electron shell.
 
+![electron-react-osx](img/electron-react-osx.png)
+
 ## Getting started
 
 ### Installing dependencies
