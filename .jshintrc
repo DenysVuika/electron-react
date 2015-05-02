@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "jquery": true
+  },
+  "esnext": true
+}
