@@ -1,6 +1,8 @@
 # electron-react
 Project template for Electron with React support.
 
+[![Dependency Status](https://gemnasium.com/DenisVuyka/electron-react.svg)](https://gemnasium.com/DenisVuyka/electron-react)
+
 ## Introduction
 
 This template provides the following features pre-configured and ready to be developed with:
