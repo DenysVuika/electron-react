@@ -5,8 +5,11 @@ function RuntimeContext () {
   events.EventEmitter.call(this);
 
   this.events = {
-    INIT_APP_MENU: 'INIT_APP_MENU'
+    INIT_APP_MENU: 'INIT_APP_MENU',
+    INIT_ROUTES: 'INIT_ROUTES'
   };
+
+  this.routes = [];
 
   // Main window id
   this.windowId = null;

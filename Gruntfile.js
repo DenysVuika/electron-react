@@ -63,6 +63,20 @@ module.exports = function (grunt) {
           'dist/app.min.js': 'dist/app.js'
         }
       }
+    },
+
+    react: {
+      'extra-pages': {
+        files: [
+          {
+            expand: true,
+            cwd: 'core/modules/extra-pages/src/components',
+            src: ['**/*.jsx'],
+            dest: 'core/modules/extra-pages/dist/components',
+            ext: '.js'
+          }
+        ]
+      }
     }
 
   });
@@ -71,22 +85,30 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-react');
 
   grunt.registerTask('default', [
     'less:dev',
-    'browserify'
+    'browserify',
+    'react'
   ]);
 
   grunt.registerTask('serve', [
     'less:dev',
     'browserify',
+    'react',
     'watch'
   ]);
 
   grunt.registerTask('dist', [
     'less:dist',
     'browserify',
-    'uglify'
+    'uglify',
+    'react'
+  ]);
+
+  grunt.registerTask('modules', [
+    'react:extra-pages'
   ]);
 
 };

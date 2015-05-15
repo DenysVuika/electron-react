@@ -5,6 +5,18 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { NavItemLink } from 'react-router-bootstrap';
 import { HomePage, AboutPage, ContactPage } from './pages';
 
+var remote = window.require('remote');
+var runtime = remote.require('./core/runtime');
+
+var _routes = runtime.routes.map(function (r) {
+  var handler = window.require(r.handler);
+  return <Route key={r.route} name={r.route} handler={handler}/>;
+});
+
+var _navbar = runtime.routes.filter(function (r) {
+  return r.navbar;
+});
+
 const App = React.createClass({
   mixins: [ Navigation ],
 
@@ -17,6 +29,11 @@ const App = React.createClass({
   },
 
   render() {
+    var links = _navbar.map(function (r) {
+      return (
+        <NavItemLink key={r.route} to={r.route}>{r.text}</NavItemLink>
+      );
+    });
     return (
       <div>
         <Navbar fixedTop fluid brand="Project name">
@@ -24,6 +41,7 @@ const App = React.createClass({
             <NavItemLink to="home">Home</NavItemLink>
             <NavItemLink to="about">About</NavItemLink>
             <NavItemLink to="contact">Contact</NavItemLink>
+            {links}
           </Nav>
         </Navbar>
 
@@ -38,6 +56,7 @@ var routes = (
     <Route name="home" path="/" handler={HomePage} />
     <Route name="about" handler={AboutPage} />
     <Route name="contact" handler={ContactPage} />
+    { _routes }
   </Route>
 );
 

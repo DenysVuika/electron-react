@@ -20,6 +20,9 @@ app.on('window-all-closed', function () {
 });
 
 app.on('ready', function () {
+
+  runtime.emit(runtime.events.INIT_ROUTES, appMenu);
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600
