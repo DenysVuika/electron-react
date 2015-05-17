@@ -36,9 +36,11 @@ const App = React.createClass({
     });
     return (
       <div>
-        <Navbar fixedTop fluid brand="Project name">
+        <Navbar fixedTop fluid>
           <Nav>
-            <NavItemLink to="home">Home</NavItemLink>
+            <NavItemLink to="home">
+              <i className="fa fa-lg fa-home"></i>
+            </NavItemLink>
             <NavItemLink to="about">About</NavItemLink>
             <NavItemLink to="contact">Contact</NavItemLink>
             {links}

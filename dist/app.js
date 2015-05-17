@@ -55,14 +55,14 @@ var App = _react2['default'].createClass({
       null,
       _react2['default'].createElement(
         _reactBootstrap.Navbar,
-        { fixedTop: true, fluid: true, brand: 'Project name' },
+        { fixedTop: true, fluid: true },
         _react2['default'].createElement(
           _reactBootstrap.Nav,
           null,
           _react2['default'].createElement(
             _reactRouterBootstrap.NavItemLink,
             { to: 'home' },
-            'Home'
+            _react2['default'].createElement('i', { className: 'fa fa-lg fa-home' })
           ),
           _react2['default'].createElement(
             _reactRouterBootstrap.NavItemLink,

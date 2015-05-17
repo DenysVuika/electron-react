@@ -1,6 +1,7 @@
-var React = require('react');
-var fs = require('fs');
-var path = require('path');
+var React = require('react'),
+    fs = require('fs'),
+    path = require('path');
+
 var md = require('markdown-it')({
   replaceLink: function (link, env) {
     return '#/help?page=' + link;
@@ -9,7 +10,6 @@ var md = require('markdown-it')({
 
 var Help = React.createClass({displayName: "Help",
   getPageContent: function (page) {
-    //var content = "<strong>hello world</strong>";
     var root = path.join(__dirname, '../../content');
     var content = fs.readFileSync(path.join(root, page), 'utf8');
     return {
