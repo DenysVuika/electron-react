@@ -76,6 +76,17 @@ module.exports = function (grunt) {
             ext: '.js'
           }
         ]
+      },
+      'help-md': {
+        files: [
+          {
+            expand: true,
+            cwd: 'core/modules/help-md/src/components',
+            src: ['**/*.jsx'],
+            dest: 'core/modules/help-md/dist/components',
+            ext: '.js'
+          }
+        ]
       }
     }
 
@@ -108,7 +119,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('modules', [
-    'react:extra-pages'
+    'react'
   ]);
 
 };

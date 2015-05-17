@@ -10,6 +10,8 @@
   "author": "Denis Vuyka <denis.vuyka@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "markdown-it": "^4.2.1",
+    "markdown-it-replace-link": "^1.0.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.22.3",
     "react-router": "^0.13.3",
